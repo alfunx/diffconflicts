@@ -39,8 +39,7 @@ function! s:diffconfl()
     endif
 
     " Set up the right-hand side.
-    rightb vsplit
-    enew
+    rightb vnew
     silent execute "read #". l:origBuf
     1delete
     silent execute "file RCONFL"
@@ -141,7 +140,9 @@ function! s:checkThenDiff()
             \ | echohl None
         return s:diffconfl()
     else
-        echohl WarningMsg | echo "No conflict markers found." | echohl None
+        echohl WarningMsg
+            \ | echon "No conflict markers found."
+            \ | echohl None
     endif
 endfunction
 
